@@ -1,13 +1,13 @@
 package Products;
 
 public class Product {
-    int id;
-    int manufacturerId;
-    String name;
-    String description;
-    String manufacturer;
-    int price;
-    int stockQuantity;
+    private int id;
+    private int manufacturerId;
+    private String name;
+    private String description;
+    private String manufacturer;
+    private int price;
+    private int stockQuantity;
 
     public Product(int id, int manufacturerId, String name, String description, String manufacturer, int price, int stockQuantity) {
         this.id = id;

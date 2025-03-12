@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerRepository {
-    Connection mysql = new DatabaseHandler().getConnection();
+    private Connection mysql = new DatabaseHandler().getConnection();
 
     public CustomerRepository() throws SQLException {
 

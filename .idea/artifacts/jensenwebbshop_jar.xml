@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jensenwebbshop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jensenwebbshop_jar</output-path>
+    <root id="archive" name="jensenwebbshop.jar">
+      <element id="module-output" name="jensenwebbshop" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/mysql-connector-j-9.2.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

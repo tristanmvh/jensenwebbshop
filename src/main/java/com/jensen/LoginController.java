@@ -3,16 +3,14 @@ package com.jensen;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.jensen.LoginService;
-
-public class Logincontroller {
+public class LoginController {
 
     LoginService loginService;
 
     // Scanner för användarinput
     Scanner scanner;
 
-    public Logincontroller() {
+    public LoginController() throws SQLException {
         // Skapa instanser av nödvändiga objekt
         this.loginService = new LoginService();
         this.scanner = new Scanner(System.in);
@@ -23,7 +21,7 @@ public class Logincontroller {
             try {
                 System.out.println("\n=== Login ===");
                 System.out.println("1. Logga in som kund");
-                System.out.println("2. Logga in som Admin");
+                //System.out.println("2. Logga in som Admin");
                 System.out.println("0. Avsluta");
                 System.out.print("Välj ett alternativ: ");
 
@@ -37,13 +35,13 @@ public class Logincontroller {
                         String password = scanner.nextLine();
                         loginService.loginAsCustomer(email, password);
                         break;
-                    case "2":
-                        System.out.println("Enter name:");
-                        String userName = scanner.nextLine();
-                        System.out.println("Enter password");
-                        String adminPassword = scanner.nextLine();
-                        loginService.loginAsAdmin(userName, adminPassword);
-                        break;
+//                    case "2":
+//                        System.out.println("Enter name:");
+//                        String userName = scanner.nextLine();
+//                        System.out.println("Enter password");
+//                        String adminPassword = scanner.nextLine();
+//                        loginService.loginAsAdmin(userName, adminPassword);
+//                        break;
                     case "0":
                         System.out.println("Avslutar kundhantering...");
                         return;
