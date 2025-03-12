@@ -1,4 +1,4 @@
-package Login;
+package login;
 
 import Admin.Admin;
 import Customer.Customer;

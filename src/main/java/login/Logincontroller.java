@@ -1,4 +1,4 @@
-package Login;
+package login;
 
 import java.sql.SQLException;
 import java.util.Scanner;
