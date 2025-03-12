@@ -1,4 +1,4 @@
-package com.jensen;
+package Login;
 
 public class DatabaseHandler {
 }

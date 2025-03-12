@@ -1,9 +1,7 @@
-package com.jensen;
+package Login;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import com.jensen.LoginService;
 
 public class Logincontroller {
 
