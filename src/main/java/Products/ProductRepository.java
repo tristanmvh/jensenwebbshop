@@ -12,10 +12,9 @@ public class ProductRepository {
     }
 
     //Hämta alla produkter i tabellen products
-    public ArrayList<Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts(boolean needsToBeAvailable) {
         try(Connection mysql = new DatabaseHandler().getConnection();) {
             ArrayList<Product> products = new ArrayList<Product>();
-
             String query = """
                     SELECT products.product_id,
                     products.manufacturer_id,
@@ -27,6 +26,9 @@ public class ProductRepository {
                     INNER JOIN manufacturers
                     ON products.manufacturer_id = manufacturers.manufacturer_id
                     """;
+            if(needsToBeAvailable) {
+                query += " WHERE products.stock_quantity > 0;";
+            }
             ResultSet rs = mysql.createStatement().executeQuery(query);
 
             while(rs.next()) {

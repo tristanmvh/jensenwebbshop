@@ -29,6 +29,7 @@ public class ProductController {
                 "Sök produkt",
                 "Bläddra efter kategori",
                 "Visa alla produkter",
+                "Visa alla tillgängliga produkter",
                 "Tillbaka till huvudmeny"
         });
         System.out.print("Val: ");
@@ -63,8 +64,29 @@ public class ProductController {
                 this.run();
             break;
 
-            //Återgå till huvudmeny
             case "4":
+                products = service.getAllAvailableProducts();
+                if(!products.isEmpty()) {
+                    for(int i = 0; i<products.size(); i++) {
+                        Product product = products.get(i);
+                        //Printa namn, pris och antal i lager
+                        System.out.printf("%s %d SEK (%d i lager) \n",
+                                product.getName(),
+                                product.getPrice(),
+                                product.getStockQuantity()
+                        );
+                    }
+                } else {
+                    System.out.println("Inga produkter är tillgängliga för tillfället.");
+                }
+
+                System.out.println("Tryck på ENTER för att fortsätta");
+                scanner.nextLine();
+                this.run();
+                break;
+
+            //Återgå till huvudmeny
+            case "5":
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.run();
             break;

@@ -15,7 +15,11 @@ public class ProductService {
     }
 
     public ArrayList<Product> getAllProducts() {
-        return repository.getAllProducts();
+        return repository.getAllProducts(false);
+    }
+
+    public ArrayList<Product> getAllAvailableProducts() {
+        return repository.getAllProducts(true);
     }
 
     public Product getProduct(int id) throws SQLException {
