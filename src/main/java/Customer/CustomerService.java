@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class CustomerService {
 
     //Registrera kund
-    String addCustomer(Customer customer) throws SQLException {
+    public String addCustomer(Customer customer) throws SQLException {
 
         //1. Kolla först om angiven e-post address redan används
         //2. Om den inte redan används, skapa kunden.

@@ -1,6 +1,5 @@
-package com.jensen;
+package Login;
 
-import Admin.Admin;
 import Customer.Customer;
 import Customer.CustomerRepository;
 
@@ -27,16 +26,17 @@ public class LoginService {
         Customer customer = customerRepository.getCustomer(email);
 
         if (customer == null) {
-            System.out.println("No customer found"); // Ingen kund hittades
+            System.out.println("Fel e-postadress eller lösenord. Vänligen försök igen."); // Ingen kund hittades
         } else if (customer.getPassword().equals(password)) {
-            System.out.println("Congrats you've logged in"); // Lyckad inloggning
+            System.out.println("Välkommen tillbaka, " + customer.getName() + "!"); // Lyckad inloggning
             return customer;
         } else {
-            System.out.println("Wrong password"); // Felaktigt lösenord
+            System.out.println("Fel användarnamn eller lösenord. Vänligen försök igen."); // Felaktigt lösenord
         }
-
         return null; // Returnera null om inloggningen misslyckas
     }
+
+
 
     /**
      * Loggar in en admin med namn och lösenord.

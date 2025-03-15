@@ -9,17 +9,18 @@ public class Menu {
     static String hej = "hej";
 
     public Menu(String[] alternatives) {
-        //Loopa genom angiven array och printa varje string
+        //Printa varje String i arrayen alternatives
         for(int i = 0; i< alternatives.length; i++) {
             System.out.println(i+1 + ". " + alternatives[i]);
         }
     }
 
-
-    public void run() {
-
+    public Menu(String header, String[] alternatives) {
+        //Loopa genom angiven array och printa varje string
+        for(int i = 0; i< alternatives.length; i++) {
+            System.out.println(i+1 + ". " + alternatives[i]);
+        }
     }
-
     //metod för att rensa terminalen/kommandotolken
     public void clearCommandLine() {
         try {

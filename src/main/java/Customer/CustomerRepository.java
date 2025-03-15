@@ -104,17 +104,20 @@ public class CustomerRepository {
     //Skapa kund
     public void addCustomer(Customer customer) throws SQLException {
 
-        String query = "INSERT INTO customers VALUES(null, ?, ?, ?, ?, ?";
+        String query = "INSERT INTO customers VALUES(null, ?, ?, ?, ?, ?)";
 
         try(Connection mysql = new DatabaseHandler().getConnection();) {
             PreparedStatement stmt = mysql.prepareStatement(query);
-            stmt.setInt(1, customer.getId());
-            stmt.setString(2, customer.getName());
-            stmt.setString(3, customer.getUsername());
-            stmt.setString(4, customer.getPhoneNumber());
+            stmt.setString(1, customer.getName());
+            stmt.setString(2, customer.getUsername());
+            stmt.setString(3, customer.getPhoneNumber());
+            stmt.setString(4, customer.getAddress());
+            stmt.setString(5, customer.getPassword());
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
 

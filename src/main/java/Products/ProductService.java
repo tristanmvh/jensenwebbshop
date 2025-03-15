@@ -13,4 +13,12 @@ public class ProductService {
     public ArrayList<Product> SearchProduct(String searchQuery) {
         return repository.searchProduct(searchQuery);
     }
+
+    public ArrayList<Product> getAllProducts() {
+        return repository.getAllProducts();
+    }
+
+    public Product getProduct(int id) throws SQLException {
+        return repository.getProduct(id);
+    }
 }

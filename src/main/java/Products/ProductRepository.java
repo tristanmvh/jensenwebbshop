@@ -83,4 +83,29 @@ public class ProductRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public Product getProduct(int id) throws SQLException {
+        Product product = null;
+        String query = "SELECT * FROM products WHERE product_id = ?";
+        try(Connection mysql = new DatabaseHandler().getConnection();) {
+            PreparedStatement stmt = mysql.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                product = new Product(
+                        rs.getInt("products.product_id"),
+                        rs.getInt("products.manufacturer_id"),
+                        rs.getString("products.name"),
+                        rs.getString("products.description"),
+                        rs.getString("manufacturers.name"),
+                        rs.getInt("products.price"),
+                        rs.getInt("products.stock_quantity")
+                );
+            }
+            return product;
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
+    }
 }
