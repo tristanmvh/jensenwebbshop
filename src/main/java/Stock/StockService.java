@@ -1,26 +1,22 @@
 package Stock;
 
+import Product.Product;
+
 import java.sql.*;
 
 public class StockService {
-    private StockRepository lagerRepo = new StockRepository();
+    private StockRepository repository = new StockRepository();
 
-    public void getStock(int productId, int requiredQuantity) throws SQLException {
-        if (lagerRepo.getStockQuantity(productId) >= requiredQuantity) {
-            System.out.println("Finns i lager");
-        } else {
-            System.out.println("Produkten finns inte tillräckligt i lagret");
-        }
+    public int getStock(Product product) throws SQLException {
+        return repository.getStockQuantity(product);
     }
 
-    public void setStock(int productId, int orderedQuantity) throws SQLException {
-        int stock = lagerRepo.getStockQuantity(productId);
+    public void setStock(Product product, int quantity) throws SQLException {
+        int stock = repository.getStockQuantity(product);
 
-        if (stock >= orderedQuantity) {
-            lagerRepo.setStockQuantity(productId, stock - orderedQuantity);
-            System.out.println("LagerSaldo uppdaterad");
-        } else {
-            System.out.println("Inte tillräckligt produkter i Lagret");
+
+        if (stock + quantity > 0) {
+            repository.setStockQuantity(product, stock + quantity);
         }
     }
 }

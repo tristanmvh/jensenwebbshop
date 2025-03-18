@@ -1,6 +1,5 @@
-package Products;
+package Product;
 
-import Customer.Customer;
 import com.jensen.DatabaseHandler;
 
 import java.sql.*;
@@ -88,7 +87,18 @@ public class ProductRepository {
 
     public Product getProduct(int id) throws SQLException {
         Product product = null;
-        String query = "SELECT * FROM products WHERE product_id = ?";
+        String query = """
+                    SELECT products.product_id,
+                    products.manufacturer_id,
+                    products.name,
+                    products.description,
+                    products.price, products.stock_quantity,
+                    manufacturers.name
+                    FROM products
+                    INNER JOIN manufacturers
+                    ON products.manufacturer_id = manufacturers.manufacturer_id
+                    WHERE products.product_id = ?;
+                    """;
         try(Connection mysql = new DatabaseHandler().getConnection();) {
             PreparedStatement stmt = mysql.prepareStatement(query);
             stmt.setInt(1, id);

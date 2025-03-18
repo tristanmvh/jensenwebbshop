@@ -1,11 +1,11 @@
 package Cart;
 
-import Products.Product;
+import Product.Product;
 
 import java.util.ArrayList;
 
 public class CartService {
-    Cart cart;
+    private Cart cart;
 
     public CartService() {
         cart = new Cart();

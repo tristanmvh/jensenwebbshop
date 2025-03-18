@@ -8,12 +8,12 @@ import Customer.CustomerService;
 
 public class LoginController {
 
-    LoginService loginService;
-    Customer customer;
-    CustomerService customerService;
+    private LoginService loginService;
+    private Customer customer;
+    private CustomerService customerService;
 
     // Scanner för användarinput
-    Scanner scanner;
+   private  Scanner scanner;
 
     public LoginController() throws SQLException {
         // Skapa instanser av nödvändiga objekt

@@ -1,6 +1,7 @@
 package Cart;
 
-import Products.Product;
+import Order.OrderService;
+import Product.Product;
 import Customer.Customer;
 import com.jensen.MainMenu;
 import com.jensen.Menu;
@@ -13,11 +14,15 @@ public class CartController {
     private Menu menu;
     private MainMenu mainMenu;
     private Scanner scanner;
+    private OrderService orderService;
+    private Cart cart;
 
     public CartController() throws SQLException {
         this.cartService = new CartService();
         this.scanner = new Scanner(System.in);
         this.mainMenu = new MainMenu();
+        this.orderService = new OrderService();
+        this.cart = new Cart();
     }
 
     public void run(Customer customer) throws SQLException {
@@ -29,8 +34,11 @@ public class CartController {
         switch(choice) {
             //Lägg beställning
             case "1":
-                System.out.println("Din beställning har lagts!");
+                orderService.createOrder(cart, customer);
+                System.out.println("Din beställning har lagts! Återgår till huvudmeny.");
+                mainMenu.run();
                 break;
+
             //Tillbaka till huvudmeny.
             case "2":
                 mainMenu.run();

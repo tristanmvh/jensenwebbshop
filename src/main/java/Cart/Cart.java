@@ -1,12 +1,12 @@
 package Cart;
 
-import Products.Product;
+import Product.Product;
 
 import java.util.ArrayList;
 
 public class Cart {
 
-    private static ArrayList<Object[]> cart;
+    private static ArrayList<Object[]> cart = new ArrayList<>();
 
     /*
         cart är av typen Object därför att man ska kunna lagra produkten (Product)
@@ -15,7 +15,6 @@ public class Cart {
      */
 
     public Cart() {
-        cart = new ArrayList<Object[]>();
     }
 
     public ArrayList<Object[]> getCart() {

@@ -118,6 +118,26 @@ public class CustomerRepository {
             throw new RuntimeException(e);
         }
 
+
+
+    }
+
+    //Uppdaterar kunds info
+    public boolean updateCustomerInformation(Customer customer) throws SQLException {
+        String query = "UPDATE Customers SET email = ?, address = ?, phone = ? WHERE customer_Id = ?";
+        try (Connection mysql = new DatabaseHandler().getConnection();) {
+            PreparedStatement stmt = mysql.prepareStatement(query);
+
+            stmt.setString(1, customer.getUsername());
+            stmt.setString(2, customer.getAddress());
+            stmt.setString(3, customer.getPhoneNumber());
+            stmt.setInt(4, customer.getId());
+
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        }
     }
 }
 

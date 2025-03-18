@@ -1,11 +1,11 @@
-package Products;
+package Product;
 
 
+import Category.CategoryController;
 import com.jensen.MainMenu;
 import com.jensen.Menu;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Cart.CartService;
@@ -14,6 +14,7 @@ public class ProductController {
     private Menu menu;
     private final ProductService service;
     private final CartService cartService;
+    private CategoryController categoryController;
 
     public ProductController() throws SQLException {
         service = new ProductService();
@@ -43,8 +44,8 @@ public class ProductController {
 
             //Bläddra efter kategori
             case "2":
-                System.out.println("Not implemented yet");
-                this.run();
+                categoryController = new CategoryController();
+                categoryController.run();
             break;
 
             //Visa alla produkter
@@ -68,13 +69,8 @@ public class ProductController {
                 products = service.getAllAvailableProducts();
                 if(!products.isEmpty()) {
                     for(int i = 0; i<products.size(); i++) {
-                        Product product = products.get(i);
-                        //Printa namn, pris och antal i lager
-                        System.out.printf("%s %d SEK (%d i lager) \n",
-                                product.getName(),
-                                product.getPrice(),
-                                product.getStockQuantity()
-                        );
+                        //Printa produkter
+                        printProduct(products.get(i));
                     }
                 } else {
                     System.out.println("Inga produkter är tillgängliga för tillfället.");
@@ -108,12 +104,7 @@ public class ProductController {
         if(!result.isEmpty()) {
             //Printa funna produkter
             for(int i = 0; i<result.size(); i++) {
-                Product product = result.get(i);
-                System.out.printf("%s (%s)", product.getName(), product.getPrice());
-                System.out.println("Beskrivning: " + product.getDescription());
-                System.out.println("Tillverkare: " + product.getManufacturer());
-                System.out.println("Artikelnummer: " + product.getId());
-                System.out.print("Antal i lager: " + product.getStockQuantity());
+                printProduct(result.get(i));
             }
             //Om bara en produkt hittades och den finns i lager
             if(result.size() == 1 && result.getFirst().getStockQuantity() > 0) {
@@ -142,6 +133,9 @@ public class ProductController {
                 scanner.nextLine();
                 this.run(); //Återgå till menyn
             }
+        } else {
+            System.out.println("Ingen produkt hittades. ");
+            this.run();
         }
     }
 
@@ -199,9 +193,11 @@ public class ProductController {
 
     //Denna metod försöker lägga till x antal av angiven produkt och sedan berättar för användaren vad för svar den fick från CartService.
     private void tryAddToCart(Product product, int quantity) {
-        switch(cartService.addToCart(product, quantity)) {
+        String result = cartService.addToCart(product, quantity);
+        switch(result) {
             case "success":
                 System.out.println("Tillagt i varukorgen.");
+
                 break;
 
             case "too-few":
@@ -210,8 +206,17 @@ public class ProductController {
 
             case "too-many":
                 System.out.println("Fel! Det är inte tillåtet att ange ett större antal än vad där är i lager.");
+                break;
             default:
                 System.out.println("Ett oväntat fel har uppstått. Avbryter.");
         }
+    }
+
+    public void printProduct(Product product) {
+        System.out.printf("%s (%s)", product.getName(), product.getPrice());
+        System.out.println("Beskrivning: " + product.getDescription());
+        System.out.println("Tillverkare: " + product.getManufacturer());
+        System.out.println("Artikelnummer: " + product.getId());
+        System.out.println("Antal i lager: " + product.getStockQuantity());
     }
 }

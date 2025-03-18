@@ -16,8 +16,10 @@ public class Main {
 
         loginController = new LoginController();
 
-
+        /* returnerar Customer objekt för att kunna hålla koll på vilken
+        användare som är inloggad. */
         customer = loginController.run();
+
 
         if(customer != null) {
             mainMenu = new MainMenu(customer);

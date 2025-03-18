@@ -6,8 +6,6 @@ import java.io.IOException;
 //Klass som underlättar printandet av menyer
 public class Menu {
 
-    static String hej = "hej";
-
     public Menu(String[] alternatives) {
         //Printa varje String i arrayen alternatives
         for(int i = 0; i< alternatives.length; i++) {
